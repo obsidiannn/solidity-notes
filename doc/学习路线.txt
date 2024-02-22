@@ -1,0 +1,20 @@
+1.solidity 基础
+	https://solidity-by-example.org 
+	https://github.com/Web3-Club/solidity-by-example_Chinese 中文版
+	
+	solidity-by-example 进度
+		abi encode 
+	
+2.合约基础
+	https://docs.alchemy.com/ web3 向导
+3.solidity框架
+	foundry
+	
+4.oneclickdapp.com 
+	这是根据solidity生成的前端页面，方便调试
+
+remix 本地安装 
+	https://remix-ide.readthedocs.io/zh-cn/latest/remixd.html
+
+	remixd -s Z:\code\code\solidity\code-example --remix-ide http://localhost:6000
+	remixd -s Z:\code\code\solidity\code-example --remix-ide https://remix.ethereum.org/ 
