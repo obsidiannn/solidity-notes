@@ -257,3 +257,32 @@ contract MyContract {
     * 与 memory的区别是： memory 可以被修改，而calldata是只读的
   * storge
     * 用于存放链上的永久数据
+
+
+#### abi encode
+* `abi.encode` 将每个数据填充为32字节，中间补0
+* `abi.encodePacked` 省略数据长度的abi.encode
+  * 如果不与合约交互，且需要省空间的时候，可以使用
+* `abi.encodeWithSignature`:
+  * 相比`abi.encode`，增多了一个`函数签名`的参数,放在首位
+  * 签名函数 = keccak-sha3(函数名+参数)
+* `abi.encodeWithSelector`
+  * 相比`abi.encodeWithSignature` ，第一个参数为函数选择器
+
+#### abi 使用场景
+  * 通过call实现合约底层调用
+  * ethers.js abi 实现合约导入
+
+
+#### gas 优化
+  * 更多使用calldata而不是memory
+  * 变量加载到内存
+  * 循环使用`++i`而不是`i++`
+  * 缓存数组
+  * 使用短路运算
+  * 如果你确定数值不会溢出，可以使用 `unchecked`代码块包裹
+  * delete 回收storage
+  * 使用library
+  * 多用`internal`,`external` 而不是`public`
+  * 尽量使用自定义error，提示消息尽量少
+  * 使用固定长度的变量，并且把相同长度的变量尽量声明在一起，这样编译器会进行优化
