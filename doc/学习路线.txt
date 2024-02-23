@@ -1,9 +1,14 @@
 1.solidity 基础
-	https://solidity-by-example.org 
-	https://github.com/Web3-Club/solidity-by-example_Chinese 中文版
+	https://solidity-by-example.org  y
+	https://github.com/Web3-Club/solidity-by-example_Chinese 中文版 y
 	
-	solidity-by-example 进度
+	solidity-by-example 进度 y
 		abi encode 
+	https://cryptozombies.io/ zombie  
+
+	
+	僵尸进度： https://cryptozombies.io/zh/lesson/2/chapter/3
+	https://github.com/inoutcode/ethereum_book/blob/master/%E7%AC%AC%E5%85%AD%E7%AB%A0.asciidoc
 	
 2.合约基础
 	https://docs.alchemy.com/ web3 向导

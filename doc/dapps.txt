@@ -1,1 +1,15 @@
 https://github.com/Dapp-Learning-DAO/Dapp-Learning/blob/main/README-CN.md
+
+
+进度
+https://github.com/Dapp-Learning-DAO/Dapp-Learning/blob/main/docs/basic-knowledge.md
+https://github.com/inoutcode/ethereum_book/blob/master/%E7%AC%AC%E5%85%AD%E7%AB%A0.asciidoc
+
+钱包里，1比特币的概念：
+	相当于有若干交易记录最终指向你的钱包地址，而这些交易记录的币加起来，就是你的钱包余额，
+	你的私钥与交易记录能够达成验证，使得你具备操作这些币的权限
+	比特币可以拆分成 0.00000001 Btc（聪）
+	
+	utxo: unspent transaction output 未消费的交易记录
+		收到转账，会在utxo内存一笔
+		如果你不花，这个记录就会长久保留
