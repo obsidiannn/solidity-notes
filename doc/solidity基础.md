@@ -272,17 +272,3 @@ contract MyContract {
 #### abi 使用场景
   * 通过call实现合约底层调用
   * ethers.js abi 实现合约导入
-
-
-#### gas 优化
-  * 更多使用calldata而不是memory
-  * 变量加载到内存
-  * 循环使用`++i`而不是`i++`
-  * 缓存数组
-  * 使用短路运算
-  * 如果你确定数值不会溢出，可以使用 `unchecked`代码块包裹
-  * delete 回收storage
-  * 使用library
-  * 多用`internal`,`external` 而不是`public`
-  * 尽量使用自定义error，提示消息尽量少
-  * 使用固定长度的变量，并且把相同长度的变量尽量声明在一起，这样编译器会进行优化
