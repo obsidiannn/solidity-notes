@@ -4,8 +4,9 @@ pragma solidity ^0.8.20;
 import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v5.0.1/contracts/utils/introspection/ERC165.sol";
 
 interface IERC721 is IERC165 {
+    // 某人的余额
     function balanceOf(address owner) external view returns (uint balance);
-
+    // 某个币的所有者
     function ownerOf(uint tokenId) external view returns (address owner);
 
     function safeTransferFrom(address from, address to, uint tokenId) external;
@@ -31,6 +32,7 @@ interface IERC721 is IERC165 {
     ) external view returns (bool);
 }
 contract RaymooonnNFT is ERC721 {
+
     constructor(string memory name_, string memory symbol_) ERC721(name_,symbol_) {
        
     }
