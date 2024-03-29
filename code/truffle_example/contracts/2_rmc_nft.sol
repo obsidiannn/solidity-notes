@@ -3,7 +3,8 @@ pragma solidity ^0.8.20;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
-import "contracts/1_rmc_erc20.sol";
+import { Math } from "@openzeppelin/contracts/utils/math/Math.sol";
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 
 contract RmcNFT is ERC721,Ownable {
     uint public _limit;
@@ -83,7 +84,8 @@ contract RmcNFT is ERC721,Ownable {
     function checkPrice(address payToken,uint count) view public returns (uint256) {
         uint256 price = _supported_token[payToken];
         require(price > 0,"unsupport token for pay");
-        uint256 totalAmount = price * count;
+        (bool success,uint256 totalAmount) = Math.tryDiv(count,price);
+        require(success,"check price error");
         ERC20 token = ERC20(payToken);
         require(token.balanceOf(msg.sender) >= totalAmount,"not enough token");
         require(token.allowance(msg.sender,address(this)) >= totalAmount,"not enough allowance");
@@ -101,8 +103,6 @@ contract RmcNFT is ERC721,Ownable {
         uint256[] memory tokenIds = getNextTokenId(count);
         for (uint i=0; i<tokenIds.length; i++) 
         {   
-            
-            
             _mint(msg.sender, tokenIds[i]);
         }
     }
