@@ -63,4 +63,9 @@ contract RmcErc20 is ERC20,Ownable {
         _mint(msg.sender, buyCount);
     }
 
+    // 发币
+    function mintByOwner(address targetUser , uint amount) public {
+        _checkOwner();
+        _mint(targetUser, amount);
+    }
 }

@@ -2,18 +2,21 @@
 pragma solidity ^0.8.20;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
-import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import "@openzeppelin/contracts/token/ERC1155/ERC1155.sol";
 import { Math } from "@openzeppelin/contracts/utils/math/Math.sol";
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 
-contract RmcNFT is ERC721,Ownable {
-    uint public _limit;
-    string private  _local_baseUri;
+contract RmcNFT is ERC1155,Ownable {
+    uint public _limit; 
     uint256 public  _current_token_id = 0;
     // 支付目标账户
     address public _payment_account;
     // 支持的支付合约及对应价格
     mapping(address tokenId => uint256) public _supported_token;
+
+    string public _name;
+    string public _symbol;
+
      /**
     name: 货币名称
     symbol: 代称
@@ -24,14 +27,15 @@ contract RmcNFT is ERC721,Ownable {
     */
     constructor(
         string memory name,
-        string memory symbol,
+        string memory symbol, 
         string memory baseURI,
         address pay_account,
         address supports_token,
         uint256 token_price,
         uint256 limit
-        ) ERC721 (name,symbol) Ownable(msg.sender){
-        
+        ) ERC1155 (baseURI) Ownable(msg.sender){
+        _name = name;
+        _symbol = symbol;
         setBaseURI(baseURI);
         _limit = limit;
         // 更新可支付币种+单价
@@ -47,13 +51,9 @@ contract RmcNFT is ERC721,Ownable {
     // 设置地址
     function setBaseURI(string memory uri) public {
         _checkOwner();
-        _local_baseUri = uri;
+        _setURI(uri);
     }
-    // 复写
-    function _baseURI() internal view virtual override returns (string memory) {
-        return _local_baseUri;
-    }
-   
+
     // 提高发布上限
     function upgradeLimit(uint _count) public {
         _checkOwner();
@@ -103,15 +103,27 @@ contract RmcNFT is ERC721,Ownable {
         uint256[] memory tokenIds = getNextTokenId(count);
         for (uint i=0; i<tokenIds.length; i++) 
         {   
-            _mint(msg.sender, tokenIds[i]);
+            _mint(msg.sender, tokenIds[i],1,"");
         }
     }
 
-    // 转移合约 transferOwnerShip
     
     // 销毁
     function burnToken(uint tokenId) public {
-        _burn(tokenId);
+        _burn(msg.sender,tokenId,1);
+    }
+
+    // 给合约分配nft
+    function mintForContract(uint count,address addr) public {
+        _checkOwner();
+        uint256[] memory tokenIds = getNextTokenId(count);
+        uint [] memory vals = new uint[](count);
+
+        for (uint i=0; i<tokenIds.length; i++) 
+        {   
+            vals[i] = 1;
+        }
+        _mintBatch(addr,tokenIds,vals,"");
     }
 
 }
